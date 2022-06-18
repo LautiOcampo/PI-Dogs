@@ -1,0 +1,14 @@
+.landing{
+ 
+    width: 100%;
+    height: 100vh;
+    background-image: url('https://estaticos-cdn.prensaiberica.es/clip/5b8e2a7d-3ff9-43bf-980d-9c390b1eb07a_16-9-discover-aspect-ratio_default_0.jpg');
+    background-color: rgb(100,100,100);
+    background-size: 100%;
+    background-position: right;
+    background-position-y: bottom; 
+    text-align: center;
+    background-repeat: no-repeat;
+    position: relative;
+    background-color:none;
+}
