@@ -5,6 +5,7 @@ import { getDogs, filterCreated, getTemperaments, filterByTemperaments, orderByN
 import {Link} from 'react-router-dom'
 import Card from './Card'
 import Paginado from './Paginado/Paginado.jsx'
+import SearchBar from './SearchBar'
 
 export default function Home (){
     const dispatch = useDispatch()
@@ -104,21 +105,11 @@ return(
             </select>
 
             <span> Filter By Breed  </span>
-
             <select value={razas} onChange={e => handleFilterCreated(e)}>
                 <option value="breeds">All</option>
                 <option value="created">Created</option>
                 <option value="api"> Existentes</option>
             </select>
-
-            {/* <span>Filter by temperament </span>
-            <select onChange={(e) => handleFilterTemperaments(e)}>
-                <option value="All">All</option>
-                {temperaments.map((temp, index) => (
-                <option onClick={(e) => handleClick(e)} key={index}>{temp.name}</option>
-                        ))}
-
-                    </select> */}
             
             <span>Filter by temperament </span>
             <select value={temperament} onChange={e => handleFilterTemperaments(e)}>
@@ -127,6 +118,8 @@ return(
                 <option onClick={(e) => handleClick(e)} key={index}>{temp.name}</option>
                             ))}
             </select>
+
+            <SearchBar/>
 
             <Paginado 
             dogsPerPage={dogsPerPage}

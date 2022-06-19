@@ -19,6 +19,12 @@ function rootReducer(state= initialState, action){
                 temperaments: action.payload
             }
 
+        case 'GET_NAME':
+            return{
+                ...state,
+                dogs: action.payload
+            }
+
         case 'ORDER_BY_NAME':
             let ordenar = action.payload === 'az' ? state.dogs.sort(function(a,b){
                 if (a.name > b.name){
@@ -54,10 +60,28 @@ function rootReducer(state= initialState, action){
                 ...state,
                 dogs: ordenByWeight
             }
+         
+        // No funciona
+        // case 'ORDER_BY_WEIGHT':
+        //     let ordenByWeight = action.payload
+        //     function compare(a,b){
+        //         if(action.payload === 'min'){
+        //         return a.minWeight - b.minWeight
+        //         }
+        //         else if(action.payload === 'max'){
+        //             return b.minWeight - a.minWeight
+        //         }
+        //         return 0
+        // }
+        //     return{
+        //         ...state,
+        //         dogs: compare
+        //     }
 
         case "FILTER_BY_TEMPERAMENTS":
             const allDogs = state.allDogs
-            const temperamentFilter = action.payload === 'All' ? allDogs : allDogs.filter((e)=> e.temperament?.includes(action.payload))
+            const temperamentFilter = action.payload === 'All' ? allDogs :
+            allDogs.filter((e)=> e.temperament?.includes(action.payload))
             return {
                 ...state,
                 dogs: temperamentFilter,
@@ -70,6 +94,11 @@ function rootReducer(state= initialState, action){
             return{
                 ...state,
                 dogs: action.payload === "All" ? state.allDogs : statusFiltered2
+            }
+        
+        case 'POST_DOG':
+            return{
+                ...state,
             }
 
         default: return state;

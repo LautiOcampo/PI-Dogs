@@ -21,6 +21,23 @@ export function getTemperaments (){
     }
 }
 
+export function getName(name){
+    return async function(dispatch){
+        try {
+        var json = await axios("http://localhost:3001/dogs?name=" + name);
+        return dispatch({
+            type: 'GET_NAME',
+            payload: json.data
+        })    
+    }
+    catch(error) {
+        console.log(error);
+        // alert ("Raza no encontrada")
+    } 
+}
+
+}
+
 export function orderByName(payload){
     return{
         type: 'ORDER_BY_NAME',
@@ -50,6 +67,13 @@ export function filterCreated (payload) {
     }
 }
 
+export function postDog(payload){
+    return async function(dispatch){
+        let json = await axios.post('http://localhost:3001/dogs', payload);
+        console.log(json)
+        return json;
+    }
+}
 
 //////////Del seba:
 
