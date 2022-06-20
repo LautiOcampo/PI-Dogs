@@ -133,7 +133,7 @@ return(
                         <Link to={"/home" + c.id}>
                             <Card 
                             name={c.name} 
-                            img={c.img} 
+                            img={c.img ? c.img : c.image} 
                             key={c.id}
                             maxWeight={c.maxWeight}
                             minWeight={c.minWeight}

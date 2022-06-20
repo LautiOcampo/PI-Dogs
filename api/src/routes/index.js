@@ -24,7 +24,7 @@ const getApiInfo = async () => {
             minHeight: el.height.metric.slice(0, 2),
             maxHeight: el.height.metric.slice(4),
             temperament: el.temperament,
-            img: el.image.url,
+            image: el.image.url,
         };
     });
     return apiInfo;
@@ -62,7 +62,7 @@ const getAllDogs = async () => {
     return infoTotal;
 }
 
-router.get('/dogs', async (req,res) => {
+router.get('/dogs', async (req,res, next) => {
 try{
     const name = req.query.name
     let allDogs = await getAllDogs();
