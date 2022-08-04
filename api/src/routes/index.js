@@ -4,8 +4,8 @@ const { Router } = require('express');
 const axios = require('axios');
 const {Dog, Temperament} = require('../db')
 
-const { YOUR_API_KEY } = "697ded3d-3743-42b6-a3ee-b5907c4039f";
-// const {YOUR_API_KEY} = process.env;
+
+const {YOUR_API_KEY} = process.env;
 
 const router = Router();
 
