@@ -68,23 +68,6 @@ function rootReducer(state= initialState, action){
                 dogs: ordenByWeight
             }
          
-        // No funciona
-        // case 'ORDER_BY_WEIGHT':
-        //     let ordenByWeight = action.payload
-        //     function compare(a,b){
-        //         if(action.payload === 'min'){
-        //         return a.minWeight - b.minWeight
-        //         }
-        //         else if(action.payload === 'max'){
-        //             return b.minWeight - a.minWeight
-        //         }
-        //         return 0
-        // }
-        //     return{
-        //         ...state,
-        //         dogs: compare
-        //     }
-
         case "FILTER_BY_TEMPERAMENTS":
             const allDogs = state.allDogs
             const temperamentFilter = action.payload === 'All' ? allDogs :
@@ -96,7 +79,6 @@ function rootReducer(state= initialState, action){
 
         case "FILTER_CREATED":
 
-            //video Selene:
             const statusFiltered2 = action.payload === "created" ? state.allDogs.filter(el => el.createdInDB) : state.allDogs.filter(el => !el.createdInDB)
             return{
                 ...state,
@@ -109,6 +91,7 @@ function rootReducer(state= initialState, action){
             }
 
         default: return state;
+
     }
 }
 

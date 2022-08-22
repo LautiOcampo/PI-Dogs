@@ -3,12 +3,34 @@
     width: 100%;
     height: 100vh;
     background-image: url('https://estaticos-cdn.prensaiberica.es/clip/5b8e2a7d-3ff9-43bf-980d-9c390b1eb07a_16-9-discover-aspect-ratio_default_0.jpg');
-    background-color: rgb(100,100,100);
+    background-color: rgba(0, 0, 0, 0.425);
     background-size: 100%;
-    background-position: right;
-    background-position-y: bottom; 
+    /* background-position: right; */
+    background-position-y: center; 
     text-align: center;
     background-repeat: no-repeat;
     position: relative;
     background-color:none;
+    font-size: 15px;
+    color: aliceblue;
+    background-blend-mode:darken
+}
+
+.title{
+    margin-top: 0;
+    padding-top: 30px;
+    font-size: 50px;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    margin-bottom: 10px;
+}
+
+.boton{
+    width: 180px;
+    height: 50px;
+    background-color: #04182cc2;
+    color: aliceblue;
+    border: 3px solid #04182c;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer
 }

@@ -4,8 +4,7 @@ const { Router } = require('express');
 const axios = require('axios');
 const {Dog, Temperament} = require('../db')
 
-const { YOUR_API_KEY } = "697ded3d-3743-42b6-a3ee-b5907c4039f";
-// const {YOUR_API_KEY} = process.env;
+const {YOUR_API_KEY} = process.env;
 
 const router = Router();
 
@@ -25,22 +24,11 @@ const getApiInfo = async () => {
             maxHeight: el.height.metric.slice(4),
             temperament: el.temperament,
             image: el.image.url,
+            origin: el.origin,
         };
     });
     return apiInfo;
 };
-
-// const getDbInfo = async () => {
-//     return await Dog.findAll({
-//         include: {
-//             model: Temperament,
-//             attributes: ['name'],
-//             through: {
-//                 attributes: [],
-//             },
-//         }
-//     })
-// }
 
 const getDbInfo = async () => { //saco toda la info de mi base de datos en el model Dogs e incluyo el model Temperament
     const DbInfo = await Dog.findAll({
@@ -153,52 +141,6 @@ router.get('/dogs/:id', async(req, res) => {
     }
 })
 
-
-/////////////////////// Esta ruta es del Seba, tambien anda
-// router.get('/temperaments',async(req,res)=>{
-//     try{
-//         let tempeSet = new Set();
-//         const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`)
-
-//         temperamentApi.data.forEach(dog => {
-//             let tempArray = dog.temperament ? dog.temperament.split(', ') : []
-//             tempArray.forEach(temperament => tempeSet.add(temperament))
-
-//         })
-//         const tempe = Array.from(tempeSet)
-
-//         tempe.forEach(async(elem)=>{
-//             await Temperament.findOrCreate({
-//                     where:{
-//                         name:elem,
-//                     }
-//                 });
-//         });
-
-//         const temperamentDog = await Temperament.findAll();
-//         res.json(temperamentDog);
-        
-//     }catch (error){
-//         console.log(error);
-//     }
-// });
-
-
-
-
-// router.get('/dog/:id',async(req,res,next)=>{
-//     try{
-//         const {id}=req.params;
-//         let dogsTotal = await getDogs();
-
-//         if(id){
-//             let idDog = await dogsTotal.filter(dog => id.length>8 ? dog.id === id : (dog.id)===parseInt(id));
-//             idDog ? res.status(200).send(idDog) : res.status(404).send("Dog not found");
-//         }
-//     }catch (error){
-//         next(error)
-//     }
-// });
 
 
 module.exports = router;

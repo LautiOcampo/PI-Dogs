@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function getDogs(){
     return async function(dispatch){
-        var info = await axios.get('http://localhost:3001/dogs',{
+        var info = await axios.get('/dogs',{
         });
         return dispatch({
             type: 'GET_DOGS',
@@ -13,7 +13,7 @@ export function getDogs(){
 
 export function getTemperaments (){
     return async function (dispatch){
-        var json = await axios("http://localhost:3001/temperaments",);
+        var json = await axios("/temperaments",);
         return dispatch ({
             type: 'GET_TEMPERAMENT', 
             payload: json.data
@@ -24,15 +24,14 @@ export function getTemperaments (){
 export function getName(name){
     return async function(dispatch){
         try {
-        var json = await axios("http://localhost:3001/dogs?name=" + name);
+        var json = await axios("/dogs?name=" + name);
         return dispatch({
             type: 'GET_NAME',
             payload: json.data
         })    
     }
     catch(error) {
-        console.log(error);
-        // alert ("Raza no encontrada")
+        alert ("Raza no encontrada")
     } 
 }
 }
@@ -40,7 +39,7 @@ export function getName(name){
 export function getDetail(id){
     return async function(dispatch){
         try{
-            var json = await axios.get("http://localhost:3001/dogs/" + id);
+            var json = await axios.get("/dogs/" + id);
             return dispatch({
                 type: 'GET_DETAIL',
                 payload: json.data
@@ -84,26 +83,12 @@ export function filterCreated (payload) {
 
 export function postDog(payload){
     return async function(dispatch){
-        let json = await axios.post('http://localhost:3001/dogs', payload);
-        console.log(json)
-        return json;
+        try{
+            const json = await axios.post('/dogs', payload);
+            return json
+        }
+        catch(error){
+            console.log(error)
+        }
     }
-}
-
-//////////Del seba:
-
-// export function getDogs() {
-//     return  async function (dispatch) {
-//         try{
-//             var info= await axios("http://localhost:3001/dogs")
-//                 return dispatch ({
-//                     type: 'GET_ALL_DOGS',
-//                     payload: info.data
-//                 })
-            
-// }
-//     catch (error){
-//     console.log(error)
-//     }
-//   }
-// }
+};

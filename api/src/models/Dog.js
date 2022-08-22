@@ -37,6 +37,9 @@ module.exports = (sequelize) => {
     lifeSpan:{
       type: DataTypes.STRING,
     },
+    // origin:{
+    //   type: DataTypes.STRING,
+    // },
     createdInDB: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

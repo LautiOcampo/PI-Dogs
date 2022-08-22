@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getDogs, filterCreated, getTemperaments, filterByTemperaments, orderByName, orderByWeight } from '../actions'
+import { getDogs, filterCreated, getTemperaments, filterByTemperaments, orderByName, orderByWeight } from '../../actions'
 import {Link} from 'react-router-dom'
-import Card from './Card'
-import Paginado from './Paginado/Paginado.jsx'
-import SearchBar from './SearchBar'
+import Card from '../Card/Card.jsx'
+import Paginado from '../Paginado/Paginado.jsx'
+import SearchBar from '../SearchBar/SearchBar'
+import s from './Home.module.css'
 
 export default function Home (){
     const dispatch = useDispatch()
@@ -13,8 +14,8 @@ export default function Home (){
     
     const [currentPage, setCurrentPage] = useState (1)
     const [dogsPerPage, setDogsPerPage] = useState (8)
-    const indexOfLastDog = currentPage * dogsPerPage   //
-    const indexOfFirstDog = indexOfLastDog - dogsPerPage  //
+    const indexOfLastDog = currentPage * dogsPerPage   //  8 / 16 / 24
+    const indexOfFirstDog = indexOfLastDog - dogsPerPage  // 0 / 8 / 16
     const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog)
 
     const paginado = (pageNumber) => {
@@ -64,15 +65,7 @@ function handleFilterTemperaments(e) {
     setTemperament(e.target.value)
 }
 
-// codigo Seba
-// const [totalTodos, setBreeds] = useState('all')
-// function handleFilterCreated(e) {
-//     e.preventDefault()
-//     dispatch(filterCreated(e.target.value))
-//     setBreeds(e.target.value)
-//     setCurrentPage(1)
 
-// }
 
 const [razas, setRazas] = useState('breeds')
 function handleFilterCreated(e){
@@ -83,21 +76,24 @@ function handleFilterCreated(e){
 
 
 return(
-    <div>
-        <Link to = '/dogs'>Crear Perro</Link>
-        <h1>Dogs App</h1>
-        <button onClick={e=>{handleClick(e)}}>
+    <div className={s.fondo} >
+        {/* <h1>Dogs App</h1> */}
+        <div className={s.nav}>
+        <button className={s.botonreload} onClick={e=>{handleClick(e)}}>
             Volver a cargar todos los perros
         </button>
-        <div>
-            <span> Sort by Name  </span>
+        <Link className={s.botoncrear} to = '/dogs'>Crear Perro</Link>
+        <SearchBar/>
+        </div>
+        <div className={s.inputs} >
+            <span> Ordenar Por Nombre  </span>
             <select value={ordenByName} onChange={e =>handleSortByName(e)}>
                 <option value='---'>---</option>
                 <option value='az'>Ascendente</option>
                 <option value='za'>Descendente</option>
             </select>
 
-            <span> Sort By Weight  </span>
+            <span> Ordenar Por Peso  </span>
             <select  value={ordenByWeight} onChange={e => handleOrderByWeight(e)}>
                 <option value=''>---</option>
                 <option value='min'>Lightest</option>
@@ -119,38 +115,48 @@ return(
                             ))}
             </select>
 
-            <SearchBar/>
 
-            <Paginado 
-            dogsPerPage={dogsPerPage}
-            allDogs={allDogs.length}
-            paginado={paginado}
-            />
+
+            </div>
+
+            <div className={s.cardcontainer}>
 
             {currentDogs?.map((c) => {
                 return(
-                    <fragment>
-                        <Link to={"/home" + c.id}>
+                    <div >
+                        <Link to={"/dog/" + c.id}>
                             <Card 
                             name={c.name} 
-                            img={c.img ? c.img : c.image} 
+                            image={c.image} 
                             key={c.id}
                             maxWeight={c.maxWeight}
                             minWeight={c.minWeight}
                             minHeight={c.minHeight}
                             maxHeight={c.maxHeight}
                             temperament={c.temperament}
-                            temperaments={c.temperaments?.map((t) => t.name).join(', ')}
+                            // temperaments={c.temperaments?.map((t) => t.name).join(', ')}
                             />
                         </Link>
-                    </fragment>
+                    </div>
                 )
             })
 
+            
             }
 
+</div>
+
+            {/* <div className={s.pag} > */}
+            <Paginado 
+            dogsPerPage={dogsPerPage}
+            allDogs={allDogs.length}
+            paginado={paginado}
+            />
+            {/* </div> */}
+
+
         </div>
-    </div>
+    
 )
 
 
